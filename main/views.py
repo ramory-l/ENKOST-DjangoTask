@@ -31,14 +31,14 @@ def getDurations(request):
     endTime = request.GET['inputData[EndTime]']
     numOfRecords = request.GET['inputData[NumOfRecords]']
     whereOperator = 'WHERE '
-    if startTime == '':
+    if startTime == '' and int(startTime) < 0:
         startTime = '00:00:00'
     else:
         if len(startTime) == 1:
             startTime = '0' + startTime + ':00:00'
         else:
             startTime += ':00:00'
-    if endTime == '':
+    if endTime == '' and int(endTime) < 0:
         endTime = '00:00:00'
     else:
         if len(endTime) == 1:
