@@ -31,14 +31,14 @@ def getDurations(request):
     endTime = request.GET['inputData[EndTime]']
     numOfRecords = request.GET['inputData[NumOfRecords]']
     whereOperator = 'WHERE '
-    if startTime == '' and int(startTime) < 0:
+    if startTime == '' or int(startTime) < 0:
         startTime = '00:00:00'
     else:
         if len(startTime) == 1:
             startTime = '0' + startTime + ':00:00'
         else:
             startTime += ':00:00'
-    if endTime == '' and int(endTime) < 0:
+    if endTime == '' or int(endTime) < 0:
         endTime = '00:00:00'
     else:
         if len(endTime) == 1:
@@ -70,8 +70,8 @@ def getDurations(request):
     print(whereOperator)
     if whereOperator == 'WHERE ':
         whereOperator = ''
-    if numOfRecords == '':
-        numOfRecords = 0
+    if numOfRecords == '' or int(numOfRecords) < 0:
+        numOfRecords = 10
     conn = sqlite3.connect('demo_db.db')
     c = conn.cursor()
     c.execute(
