@@ -25,8 +25,8 @@ def getDurations(request):
     equipment = request.GET['equipment']
     modes = request.GET['modes']
     minutes = request.GET['inputData[Minutes]']
-    startData = request.GET['inputData[StartData]']
-    endData = request.GET['inputData[EndData]']
+    startDate = request.GET['inputData[StartDate]']
+    endDate = request.GET['inputData[EndDate]']
     startTime = request.GET['inputData[StartTime]']
     endTime = request.GET['inputData[EndTime]']
     numOfRecords = request.GET['inputData[NumOfRecords]']
@@ -59,14 +59,14 @@ def getDurations(request):
         if whereOperator != 'WHERE ':
             whereOperator += ' AND '
         whereOperator += f"dur.minutes <= {minutes}"
-    if startData != '':
+    if startDate != '' and endDate == '':
         if whereOperator != 'WHERE ':
             whereOperator += ' AND '
-        whereOperator += f"dur.start = '{startData} {startTime}'"
-    if startData != '' and endData != '':
+        whereOperator += f"dur.start = '{startDate} {startTime}'"
+    if startDate != '' and endDate != '':
         if whereOperator != 'WHERE ':
             whereOperator += ' AND '
-        whereOperator += f"dur.start BETWEEN '{startData} {startTime}' AND '{endData} {endTime}'"
+        whereOperator += f"dur.start BETWEEN '{startDate} {startTime}' AND '{endDate} {endTime}'"
     print(whereOperator)
     if whereOperator == 'WHERE ':
         whereOperator = ''
