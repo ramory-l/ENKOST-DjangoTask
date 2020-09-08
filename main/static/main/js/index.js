@@ -28,16 +28,12 @@ function createSelectButton(table, selectButton) {
 })();
 
 function getDurations() {
-  let clientsToLoad = document.getElementById("clients").selectedOptions;
-  let clientsArray = Array.from(clientsToLoad).map(
-    (client) => client.innerText
-  );
-  let equipmentToLoad = document.getElementById("equipment").selectedOptions;
-  let equipmentArray = Array.from(equipmentToLoad).map(
-    (equipment) => equipment.innerText
-  );
-  let modesToLoad = document.getElementById("modes").selectedOptions;
-  let modesArray = Array.from(modesToLoad).map((mode) => mode.innerText);
+  let clientsToLoad = document.getElementById("clients").selectedOptions[0]
+    .innerText;
+  let equipmentToLoad = document.getElementById("equipment").selectedOptions[0]
+    .innerText;
+  let modesToLoad = document.getElementById("modes").selectedOptions[0]
+    .innerText;
 
   let inputData = Array.from(
     document.querySelectorAll("#fetchData input")
@@ -47,9 +43,9 @@ function getDurations() {
     url: "/get_durations",
     type: "get",
     data: {
-      clients: clientsArray,
-      equipment: equipmentArray,
-      modes: modesArray,
+      clients: clientsToLoad,
+      equipment: equipmentToLoad,
+      modes: modesToLoad,
       inputData: inputData,
     },
     success: function (response) {
